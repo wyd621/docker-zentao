@@ -13,8 +13,8 @@ RUN echo -e "LANG=\"en_US.UTF-8\"\nLANGUAGE=\"en_US:en\"" > /etc/default/locale
 RUN locale-gen en_US.UTF-8
 
 RUN apt-get install -y \
-        nginx \
-        php5-fpm \
+        apache2 \
+        php5 \
         net-tools \
         vim \
         telnet \
@@ -34,9 +34,9 @@ RUN curl -s -fSL $LAST_RELEASE_URL -o /tmp/$LAST_RELEASE_FILENAME && \
     chmod 777  /app/www && \
     sed -i -r 's/(php_*)/#\1/g' /app/www/.htaccess
 
-COPY default.conf /etc/nginx/sites-available/default.conf
-RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf && \
-    rm /etc/nginx/sites-enabled/default
+#COPY default.conf /etc/nginx/sites-available/default.conf
+#RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf && \
+#    rm /etc/nginx/sites-enabled/default
 
 
 WORKDIR /app
